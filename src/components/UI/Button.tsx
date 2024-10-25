@@ -1,16 +1,16 @@
-import { ButtonHTMLAttributes,ReactNode } from "react"
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
-interface IProps extends ButtonHTMLAttributes<HTMLDivElement> {
-    children: ReactNode;
-    className?: string;
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  className?: string;
 }
 
-const Button = ({children,className,...rest}:IProps) => {
+const Button = ({ children, className, ...rest }: IProps) => {
   return (
     <button className={`${className} w-full rounded-md text-white p-2`} {...rest}>
-        {children}
+      {children}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
