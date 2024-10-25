@@ -1,8 +1,6 @@
 import { InputHTMLAttributes } from "react"
 
-interface IProps extends InputHTMLAttributes<HTMLInputElement> {
-
-}
+type IProps = InputHTMLAttributes<HTMLInputElement>
 
 const Input = ({...rest}:IProps) => {
   return (
