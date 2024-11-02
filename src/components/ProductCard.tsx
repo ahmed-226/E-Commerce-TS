@@ -9,10 +9,13 @@ interface IProps {
     product: IProduct;
     setProductToEdit: (product: IProduct) => void;
     openEditModal: () => void;
+    setProductToEditIdx: (idx: number) => void;
+    idx: number;
+    openConfirmModal: () => void;
 }
 
 
-const ProductCard = ({ product,setProductToEdit ,openEditModal}: IProps) => {
+const ProductCard = ({ product,setProductToEdit ,openEditModal,setProductToEditIdx,openConfirmModal,idx}: IProps) => {
 
     /* --------------------states -------------------- */
     const { title, description, imageURL, price, colors,category } = product;
@@ -28,8 +31,15 @@ const ProductCard = ({ product,setProductToEdit ,openEditModal}: IProps) => {
     /* -------------------- handlers -------------------- */
 
     const onEdit = () => {
+        openEditModal()
         setProductToEdit(product)
-        console.log(product)
+        setProductToEditIdx(idx)
+
+        // console.log(product)
+    }
+
+    const addComma= () => {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
 
@@ -43,18 +53,21 @@ const ProductCard = ({ product,setProductToEdit ,openEditModal}: IProps) => {
             <div className="flex justify-start mt-3 space-x-1">
                 
                         
-            <div className="flex space-x-2 ">
+            <div className="flex flex-wrap gap-x-2 gap-y-1">
             {renderColors}
             </div>
                    
             </div>
             <div className="my-3 flex justify-between items-center">
-                <h1 className="text-xl font-bold">{price}$</h1>
-                <Image className="rounded-full h-10 w-10 object-center" key={category.name} imageUrl={category.imageURL} alt="ferarri" />
+                <h1 className="text-lg font-bold text-indigo-600">{addComma()}$</h1>
+                    <div className="flex justify-start items-center">
+                    <h1 className="text-sm font-bold text-gray-600 mr-2">{category.name}</h1>
+                        <Image className="rounded-full h-10 w-10 object-center" key={category.name} imageUrl={category.imageURL} alt="ferarri" />
+                    </div>
             </div>
             <div className="flex justify-between items-center space-x-2 ">
-                <Button className="bg-blue-500" onClick={() => console.log('clicked')}>Buy</Button>
-                <Button className="bg-red-500" onClick={openEditModal}>Edit</Button>
+                <Button className="bg-blue-500" onClick={openConfirmModal}>Delete</Button>
+                <Button className="bg-red-500" onClick={onEdit}>Edit</Button>
             </div>
 
         </div>
